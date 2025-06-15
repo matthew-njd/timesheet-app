@@ -1,0 +1,29 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace TimeSheetApp.Api.Models
+{
+    public class User
+    {
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public required string Email { get; set; }
+
+        [Required]
+        public required string PasswordHash { get; set; }
+
+        [StringLength(50)]
+        public string? FirstName { get; set; }
+
+        [StringLength(50)]
+        public string? LastName { get; set; }
+
+        [Required]
+        public required string Role { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public bool IsActive { get; set; } = true;
+    }
+}
