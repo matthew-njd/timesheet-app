@@ -20,13 +20,11 @@ namespace TimeSheetApp.Api.Services
                 new(ClaimTypes.Role, user.Role) // User role
             };
 
-            // Add any additional claims if provided
             if (additionalClaims != null)
             {
                 claims.AddRange(additionalClaims);
             }
 
-            // Get the secret key from configuration
             var key = Encoding.ASCII.GetBytes(config["JwtSettings:SecretKey"]!);
             if (key == null || key.Length == 0)
             {

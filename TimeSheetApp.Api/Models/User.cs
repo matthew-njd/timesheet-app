@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using TimeSheetApp.Api.Enums;
 
 namespace TimeSheetApp.Api.Models
 {
@@ -20,7 +21,7 @@ namespace TimeSheetApp.Api.Models
         public string? LastName { get; set; }
 
         [Required]
-        public required string Role { get; set; }
+        public required UserRole Role { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
