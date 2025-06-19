@@ -23,8 +23,5 @@ namespace TimeSheetApp.Api.Dtos
 
         [StringLength(50, ErrorMessage = "Last Name cannot exceed 50 characters.")]
         public string? LastName { get; set; }
-
-        [Required(ErrorMessage = "Role is required.")]
-        public required UserRole Role { get; set; }
     }
 }
