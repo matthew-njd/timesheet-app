@@ -12,12 +12,12 @@ namespace TimeSheetApp.Api.Services
         {
             var claims = new List<Claim>
             {
-                new(JwtRegisteredClaimNames.Sub, user.Id.ToString()), // Subject: User ID
-                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // JWT ID
+                new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(JwtRegisteredClaimNames.Email, user.Email),
-                new(ClaimTypes.NameIdentifier, user.Id.ToString()), // Standard Claim for user ID
-                new(ClaimTypes.Email, user.Email), // Standard Claim for email
-                new(ClaimTypes.Role, user.Role) // User role
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Email, user.Email),
+                new(ClaimTypes.Role, user.Role.ToString())
             };
 
             if (additionalClaims != null)
