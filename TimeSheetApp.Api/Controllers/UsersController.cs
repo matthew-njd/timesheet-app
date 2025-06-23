@@ -93,7 +93,7 @@ namespace TimeSheetApp.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserUpdateDto updateDto)
         {
-            var authenticatedUserIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var authenticatedUserIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             if (authenticatedUserIdClaim == null || !int.TryParse(authenticatedUserIdClaim.Value, out int authenticatedUserId))
             {
                 _logger.LogWarning("Authenticated user ID not found in token for request to update user {UserId}.", id);
