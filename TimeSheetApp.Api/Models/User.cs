@@ -26,5 +26,8 @@ namespace TimeSheetApp.Api.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public bool IsActive { get; set; } = true;
+
+        // Navigation property
+        public ICollection<TimeSheet> TimeSheets { get; set; } = [];
     }
 }
