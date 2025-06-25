@@ -12,15 +12,33 @@ namespace TimeSheetApp.Api.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            ConfigureUser(modelBuilder);
+            ConfigureTimeSheet(modelBuilder);
+        }
+
+        private void ConfigureUser(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasIndex(e => e.Email).IsUnique();
-                entity.Property(e => e.Role)
-                      .HasConversion<string>();
+                entity.Property(e => e.Email).IsRequired();
+                entity.Property(e => e.PasswordHash).IsRequired();
+                entity.Property(e => e.Role).HasConversion<string>();
 
                 entity.HasMany(u => u.TimeSheets)
-                       .WithOne(ts => ts.User)
-                       .HasForeignKey(ts => ts.UserId);
+                    .WithOne(ts => ts.User)
+                    .HasForeignKey(ts => ts.UserId);
+            });
+        }
+        
+        private void ConfigureTimeSheet(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TimeSheet>(entity =>
+            {
+                entity.Property(e => e.UserId).IsRequired();
+                entity.Property(e => e.Date).IsRequired();
+                entity.Property(e => e.StartTime).IsRequired();
+                entity.Property(e => e.EndTime).IsRequired();
             });
         }
     }
