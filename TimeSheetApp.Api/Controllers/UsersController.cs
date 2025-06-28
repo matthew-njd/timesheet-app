@@ -28,7 +28,7 @@ namespace TimeSheetApp.Api.Controllers
             var users = await _context.Users
                 .Select(u => new UserResponseDto
                 {
-                    UserId = u.Id,
+                    Id = u.Id,
                     Email = u.Email,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
@@ -76,7 +76,7 @@ namespace TimeSheetApp.Api.Controllers
             _logger.LogInformation("Successfully retrieved user {UserId}.", id);
             return Ok(new UserResponseDto
             {
-                UserId = user.Id,
+                Id = user.Id,
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,

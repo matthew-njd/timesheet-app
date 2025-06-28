@@ -24,7 +24,7 @@ namespace TimeSheetApp.Api.Controllers
         [HttpPost("register")] // Route: /api/Auth/register
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)] // For email already exists
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> Register([FromBody] UserRegistrationDto registrationDto)
         {
             _logger.LogInformation("Attempting to register user with email: {Email}", registrationDto.Email);
@@ -50,7 +50,6 @@ namespace TimeSheetApp.Api.Controllers
                     IsActive = true
                 };
 
-                // Add the new user to the database and save changes
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
@@ -94,18 +93,16 @@ namespace TimeSheetApp.Api.Controllers
                 return Unauthorized("Invalid credentials.");
             }
 
-            // If login is successful, generate a JWT
             try
             {
                 string token = _jwtTokenGenerator.GenerateToken(user);
 
                 _logger.LogInformation("User '{Email}' logged in successfully.", loginDto.Email);
 
-                // Return the JWT and relevant user info
                 return Ok(new AuthResponseDto
                 {
                     Token = token,
-                    UserId = user.Id,
+                    Id = user.Id,
                     Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
